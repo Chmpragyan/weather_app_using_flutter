@@ -19,8 +19,5 @@ class WeatherService{
     }else{
       throw Exception("Error");
     }
-    
-    // final json = jsonDecode(response.body);
-    // return WeatherData.fromJson(json);
   }
 }
