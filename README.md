@@ -1,5 +1,5 @@
 # Weather App using Flutter
-The project is a simple weather app that displays the weather of given places.
+The project is a simple weather app that displays the current weather of given places. 
 
 # Features
 - Displays splash screen with timer, background image and skip button to skip splashscreen
