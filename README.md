@@ -1,16 +1,14 @@
-# weather_app
+# Weather App using Flutter
+The project is a simple weather app that displays the weather of given places.
 
-A new Flutter project.
+# Features
+- Displays splash screen with timer, background image and skip button to skip splashscreen
+- Textbox to enter location name(initially blank) and Save/update button
+- Calls weather api with location name entered and save button is pressed
+- Calls api and display icon, temperature and text(like 'clear', 'cloudy')
+- Cross platform
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screenshots
+![Screenshot (110)](https://user-images.githubusercontent.com/81068801/229262105-2c304e37-a383-4b8c-ad83-c0faafc65e53.png)
+![Screenshot (112)](https://user-images.githubusercontent.com/81068801/229262124-921e0cf0-1f92-4649-b336-2b432770cee6.png)
+![Screenshot (111)](https://user-images.githubusercontent.com/81068801/229262143-62d8962e-59b1-467a-96c6-fb1664d26889.png)
