@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:lottie/lottie.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/screens/widgets/custom_search.dart';
+import 'package:weather_app/screens/widgets/custom_text.dart';
 import 'package:weather_app/services/weather_services.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,35 +23,35 @@ class _HomePageState extends State<HomePage> {
   //   String location = await weatherService.getCurrentCity();
 
   //   try {
-      // final weatherData = await weatherService.getWeather(location);
-      // setState(() {
-      //   _weatherData = weatherData;
-      // });
+  // final weatherData = await weatherService.getWeather(location);
+  // setState(() {
+  //   _weatherData = weatherData;
+  // });
   //   } catch (e) {
   //     print(e);
   //   }
   // }
 
-  String getWeatherAnimation(String? wthCondition){
-    print(wthCondition);
+  String getWeatherAnimation(String? wthCondition) {
+    // print(wthCondition);
     if (wthCondition == null) return 'assets/images/Sunny.json';
 
-      switch (wthCondition.toLowerCase()){
-        case 'light rain':
-          return 'assets/images/wa.json';
-        case 'light drizzle':
-          return 'assets/images/wd.json';
-        case 'mist':
-          return 'assets/images/wc.json';
-        case 'cloudy':
-          return 'assets/images/wb.json';
-        case 'partly cloudy':
-          return 'assets/images/we.json';
-        case 'clear':
-          return 'assets/images/Sunny.json';
-        default:
-          return 'assets/images/Sunny.json';
-      }
+    switch (wthCondition.toLowerCase()) {
+      case 'light rain':
+        return 'assets/images/wa.json';
+      case 'light drizzle':
+        return 'assets/images/wd.json';
+      case 'mist':
+        return 'assets/images/wc.json';
+      case 'cloudy':
+        return 'assets/images/wb.json';
+      case 'partly cloudy':
+        return 'assets/images/we.json';
+      case 'clear':
+        return 'assets/images/Sunny.json';
+      default:
+        return 'assets/images/Sunny.json';
+    }
   }
 
   // @override
@@ -58,13 +60,13 @@ class _HomePageState extends State<HomePage> {
   //   fetchWeather();
   // }
 
-  fetchWeatherList() async{
+  fetchWeatherList() async {
     String location = await weatherService.getCurrentCity();
-    cities = [location,'London', 'New York', 'Paris'];
+    cities = [location, 'London', 'New York', 'Paris'];
     final weatherData = await weatherService.fetchWeatherDataForCities(cities);
-      setState(() {
-        futureWeatherList = weatherData;
-      });
+    setState(() {
+      futureWeatherList = weatherData;
+    });
   }
 
   @override
@@ -75,37 +77,124 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: cities.length,
-        itemBuilder: (context, index) {
-          return FutureBuilder<WeatherData>(
-            future: futureWeatherList[index],
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListTile(
-                  title: Text(snapshot.data!.cityName),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('${snapshot.data!.tempC.toStringAsFixed(1)}°C'),
-                      Text(snapshot.data!.wthCondition),
-                    ],
-                  ),
-                  leading: Image.network(snapshot.data!.iconUrl),
+      backgroundColor: const Color.fromARGB(255, 34, 16, 66),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              top: 60,
+              left: 25,
+              right: 25,
+            ),
+            child: TextField(
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+                hintText: 'Search...',
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onChanged: (value) {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearch(),
                 );
-              } else if (snapshot.hasError) {
-                return ListTile(
-                  title: Text('Error loading weather data for ${cities[index]}'),
-                  subtitle: Text('${snapshot.error}'),
+              },
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: cities.length,
+              itemBuilder: (context, index) {
+                return FutureBuilder<WeatherData>(
+                  future: futureWeatherList[index],
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Container(
+                        margin: EdgeInsets.only(
+                          top: 30,
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
+                        ),
+                        // padding: EdgeInsets.all(25),
+                        height: 200,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 83, 39, 154),
+                          borderRadius: BorderRadius.circular(35.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            colors: [
+                              Color.fromARGB(255, 64, 28, 122),
+                              Color.fromARGB(255, 33, 12, 69),
+                            ],
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomTempText(
+                                  tempText:
+                                      '${snapshot.data!.tempC.toStringAsFixed(1)}°C',
+                                ),
+                                CustomCityName(
+                                  cityName: snapshot.data!.cityName,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Lottie.asset(
+                                    getWeatherAnimation(
+                                        snapshot.data!.wthCondition),
+                                    height: 70,
+                                    width: 70),
+                                Text(
+                                  snapshot.data!.wthCondition,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return ListTile(
+                        title: Text(
+                            'Error loading weather data for ${cities[index]}'),
+                        subtitle: Text('${snapshot.error}'),
+                      );
+                    }
+                    return ListTile(
+                      title: Text('Loading...'),
+                      leading: CircularProgressIndicator(),
+                    );
+                  },
                 );
-              }
-              return ListTile(
-                title: Text('Loading...'),
-                leading: CircularProgressIndicator(),
-              );
-            },
-          );
-        },
+              },
+            ),
+          ),
+        ],
       ),
 
       // body: Center(

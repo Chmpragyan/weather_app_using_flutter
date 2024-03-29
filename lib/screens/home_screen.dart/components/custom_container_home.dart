@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weather_app/screens/widgets/custom_text.dart';
 
 class CustomHomeContainer extends StatelessWidget {
   const CustomHomeContainer({super.key});
@@ -9,7 +10,7 @@ class CustomHomeContainer extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 26, 10, 53),
       body: ListView.builder(
-        itemCount: 4,
+        itemCount: 3,
         itemBuilder: ((context, index) {
           return Container(
             margin: EdgeInsets.only(
@@ -39,22 +40,8 @@ class CustomHomeContainer extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      "19°",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 50,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Text(
-                      "Kathmandu",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
+                    CustomTempText(tempText: "19°",),
+                    CustomCityName(cityName: "Kathmandu",),
                   ],
                 ),
 
