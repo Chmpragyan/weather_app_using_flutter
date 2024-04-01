@@ -19,19 +19,6 @@ class _HomePageState extends State<HomePage> {
   late List<String> cities = [];
   late List<Future<WeatherData>> futureWeatherList = [];
 
-  // fetchWeather() async {
-  //   String location = await weatherService.getCurrentCity();
-
-  //   try {
-  // final weatherData = await weatherService.getWeather(location);
-  // setState(() {
-  //   _weatherData = weatherData;
-  // });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   String getWeatherAnimation(String? wthCondition) {
     // print(wthCondition);
     if (wthCondition == null) return 'assets/images/Sunny.json';
@@ -53,12 +40,6 @@ class _HomePageState extends State<HomePage> {
         return 'assets/images/Sunny.json';
     }
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchWeather();
-  // }
 
   fetchWeatherList() async {
     String location = await weatherService.getCurrentCity();
@@ -152,6 +133,9 @@ class _HomePageState extends State<HomePage> {
                                   tempText:
                                       '${snapshot.data!.tempC.toStringAsFixed(1)}°C',
                                 ),
+                                // CustomCityName(
+                                //   cityName: snapshot.data!.sunrise,
+                                // ),
                                 CustomCityName(
                                   cityName: snapshot.data!.cityName,
                                 ),
@@ -196,25 +180,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text(_weatherData?.cityName ?? 'Loading...'),
-      //       Text('${_weatherData?.tempC.round()}\u2103'),
-      //       Lottie.asset(getWeatherAnimation(_weatherData?.wthCondition)),
-      //       Text(_weatherData?.wthCondition ?? 'Loading...'),
-      //       // // Image.network(_weatherData?.iconUrl ?? ''),
-      //       // _weatherData?.iconUrl != null && _weatherData!.iconUrl.isNotEmpty
-      //       //     ? Image.network(
-      //       //         _weatherData!.iconUrl,
-      //       //         fit: BoxFit.cover,
-      //       //       )
-      //       //     : CircularProgressIndicator(),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

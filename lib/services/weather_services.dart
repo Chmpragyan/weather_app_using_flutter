@@ -27,7 +27,7 @@ class WeatherService {
   List<Future<WeatherData>> fetchWeatherDataForCities(List<String> cities) {
     return cities.map((city) async {
       final response = await http.get(Uri.parse(
-          '$BASE_URL/current.json?key=$apiKey&q=$city&aqi=no'));
+          '$BASE_URL/forecast.json?key=$apiKey&q=$city&days=1&aqi=no'));
       if (response.statusCode == 200) {
         return WeatherData.fromJson(jsonDecode(response.body));
       } else {

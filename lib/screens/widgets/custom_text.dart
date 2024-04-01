@@ -33,3 +33,20 @@ class CustomCityName extends StatelessWidget {
     );
   }
 }
+
+class CustomText extends StatelessWidget {
+  final String customText;
+  const CustomText({super.key, required this.customText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      customText,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+      ),
+    );
+  }
+}
