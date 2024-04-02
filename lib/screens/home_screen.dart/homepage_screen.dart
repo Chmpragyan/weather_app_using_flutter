@@ -211,10 +211,10 @@ class _HomePageState extends State<HomePage> {
 // //   }
 
 
-// //   final _locationController = TextEditingController();
-// //   final _weatherService = WeatherService();
+  // final _locationController = TextEditingController();
+  // final _weatherService = WeatherService();
 
-// //   WeatherData? _weatherData;
+  // WeatherData? _weatherData;
 // //   @override
 // //   Widget build(BuildContext context) {
 // //     return Scaffold(

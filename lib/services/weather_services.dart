@@ -13,15 +13,15 @@ class WeatherService {
 
   WeatherService(this.apiKey);
 
-  // Future<WeatherData> getWeather(String location) async {
-  //   final response = await http.get(
-  //       Uri.parse("$BASE_URL/current.json?key=$apiKey&q=$location&aqi=no"));
-  //   if (response.statusCode == 200) {
-  //     return WeatherData.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     throw Exception('Failed to load data-------------');
-  //   }
-  // }
+  Future<WeatherData> getWeather(String location) async {
+    final response = await http.get(
+        Uri.parse("$BASE_URL/forecast.json?key=$apiKey&q=$location&days=1&aqi=no'"));
+    if (response.statusCode == 200) {
+      return WeatherData.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load data-------------');
+    }
+  }
 
 
   List<Future<WeatherData>> fetchWeatherDataForCities(List<String> cities) {

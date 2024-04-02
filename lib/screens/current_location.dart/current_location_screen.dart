@@ -16,8 +16,8 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   final weatherService = WeatherService("9da84fe2eae84538b2823858232803");
   // WeatherData? _weatherData;
 
-  late List<String> cities = [];
-  late List<Future<WeatherData>> futureWeatherList = [];
+  // late List<String> cities = [];
+  // late List<Future<WeatherData>> futureWeatherList = [];
 
   String getWeatherAnimation(String? wthCondition) {
     // print(wthCondition);
@@ -41,19 +41,30 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
     }
   }
 
-  fetchWeatherList() async {
-    String location = await weatherService.getCurrentCity();
-    cities = [location, 'London', 'New York', 'Paris'];
-    final weatherData = await weatherService.fetchWeatherDataForCities(cities);
-    setState(() {
-      futureWeatherList = weatherData;
-    });
-  }
+  // fetchWeatherList() async {
+  //   String location = await weatherService.getCurrentCity();
+  //   cities = [location, 'London', 'New York', 'Paris'];
+  //   final weatherData = await weatherService.fetchWeatherDataForCities(cities);
+  //   setState(() {
+  //     futureWeatherList = weatherData;
+  //   });
+  // }
+
+  WeatherData? _weatherData;
 
   @override
   void initState() {
     super.initState();
-    fetchWeatherList();
+    // fetchWeatherList();
+    fetchCurrentData();
+  }
+
+  void fetchCurrentData() async {
+    String location = await weatherService.getCurrentCity();
+    final response = await weatherService.getWeather(location);
+    setState(() {
+      _weatherData = response;
+    });
   }
 
   @override
@@ -180,14 +191,14 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
             // mainAxisAlignment: MainAxisAlignment.,
             children: [
               Text(
-                "Kathmandu",
+                _weatherData?.cityName ?? 'No data',
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
                 ),
               ),
               Text(
-                "19°",
+                '${_weatherData?.tempC ?? 0}°',
                 style: TextStyle(
                   fontSize: 90,
                   fontWeight: FontWeight.w300,
@@ -195,7 +206,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
                 ),
               ),
               Text(
-                "Mostly Clear",
+                _weatherData?.wthCondition ?? 'No data',
                 style: TextStyle(
                   fontSize: 18,
                   // fontWeight: FontWeight.w300,
@@ -205,12 +216,12 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomCityName(cityName: "H:24"),
-                  CustomCityName(cityName: "H:24"),
+                  CustomCityName(cityName: 'H: ${_weatherData?.maxTemp ?? 0}|'),
+                  CustomCityName(cityName: 'L: ${_weatherData?.minTemp ?? 0}'),
                 ],
               ),
-              LottieBuilder.asset(
-                'assets/images/wa.json',
+              Lottie.asset(
+                getWeatherAnimation(_weatherData?.wthCondition),
                 height: 200,
               ),
             ],
@@ -218,85 +229,6 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         ),
         borderRadius: radius,
       ),
-
-      // body: SingleChildScrollView(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       CustomCityName(cityName: "Kathmandu"),
-      //       CustomTempText(tempText: "19"),
-      //       CustomText(customText: "Mostly Clear"),
-      //       Row(
-      //         children: [
-      //           CustomCityName(cityName: "H:24"),
-      //           CustomCityName(cityName: "H:24"),
-      //         ],
-      //       ),
-      //       SizedBox(
-      //         height: 200,
-      //       ),
-      //       Container(
-      //         height: MediaQuery.of(context).size.height,
-      //         width: MediaQuery.of(context).size.width,
-      //         decoration: BoxDecoration(
-      //           color: Colors.red,
-      //           borderRadius: BorderRadius.vertical(
-      //             top: Radius.circular(50),
-      //           ),
-      //         ),
-      // child: Column(
-      //   children: [
-      //     Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children: [
-      //         Text("Hourly Forecast"),
-      //         Text("Weekly Forecast"),
-      //       ],
-      //     ),
-      //     Container(
-      //       height: 170,
-      //       decoration: BoxDecoration(
-      //         borderRadius: BorderRadius.vertical(
-      //           top: Radius.circular(50),
-      //           bottom: Radius.circular(50),
-      //         ),
-      //       ),
-      //       child: GridView.builder(
-      //         scrollDirection: Axis.horizontal,
-      //         itemCount: 10,
-      //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //           crossAxisCount: 1,
-      //           mainAxisExtent: 70,
-      //           mainAxisSpacing: 8,
-      //           // childAspectRatio: 60 / 100,
-      //         ),
-      //         itemBuilder: (context, index) {
-      //           return Card(
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.vertical(
-      //                 top: Radius.elliptical(50, 50),
-      //                 bottom: Radius.elliptical(50, 50),
-      //               ),
-      //             ),
-      //             child: Column(
-      //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //               children: [
-      //                 Text("12PM"),
-      //                 Icon(Icons.cloud),
-      //                 Text("19"),
-      //               ],
-      //             ),
-      //           );
-      //         },
-      //       ),
-      //     )
-      //   ],
-      // ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
