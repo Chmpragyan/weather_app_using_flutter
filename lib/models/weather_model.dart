@@ -6,6 +6,8 @@ class WeatherData {
   final String sunrise;
   final double? maxTemp;
   final double? minTemp;
+  final String? hourly;
+  final double? hourlyTemp;
 
   String get iconUrl {
     return 'http:$icon';
@@ -19,6 +21,8 @@ class WeatherData {
     required this.sunrise,
     this.maxTemp,
     this.minTemp,
+    this.hourly,
+    this.hourlyTemp,
   });
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
@@ -30,6 +34,8 @@ class WeatherData {
       sunrise: json['forecast']['forecastday'][0]['astro']['sunrise'],
       maxTemp: json['forecast']['forecastday'][0]['day']['maxtemp_c'],
       minTemp: json['forecast']['forecastday'][0]['day']['mintemp_c'],
+      hourly: json['forecast']['forecastday'][0]['hour'][0]['time'],
+      hourlyTemp: json['forecast']['forecastday'][0]['hour'][0]['temp_c'],
     );
   }
 }

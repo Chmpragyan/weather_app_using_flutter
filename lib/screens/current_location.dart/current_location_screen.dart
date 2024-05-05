@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/screens/home_screen.dart/homepage_screen.dart';
 import 'package:weather_app/screens/widgets/custom_text.dart';
 import 'package:weather_app/services/weather_services.dart';
 
@@ -74,6 +75,26 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
       topRight: Radius.circular(24.0),
     );
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePage()));
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Text(
+                "More",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: Colors.deepPurple,
       body: SlidingUpPanel(
         minHeight: MediaQuery.of(context).size.height * 0.35,
@@ -186,7 +207,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         //   ),
         // ),
         body: Padding(
-          padding: EdgeInsets.only(top: 70),
+          padding: EdgeInsets.only(top: 10),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.,
             children: [
@@ -232,3 +253,41 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
     );
   }
 }
+
+
+
+
+
+
+// return FutureBuilder<WeatherData>(
+                  //   future: futureWeatherList[index],
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.hasData) {
+                  //       return Card(
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.vertical(
+                  //             top: Radius.elliptical(50, 50),
+                  //             bottom: Radius.elliptical(50, 50),
+                  //           ),
+                  //         ),
+                  //         child: Column(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //           children: [
+                  //             Text("12PM"),
+                  //             Icon(Icons.cloud),
+                  //             // Text('${snapshot.data!.hourlyTemp}'),
+                  //             Text("19"),
+                  //           ],
+                  //         ),
+                  //       );
+                  //     } else if (snapshot.hasError) {
+                  //       return ListTile(
+                  //         title: Text('Error loading weather data for'),
+                  //         subtitle: Text('${snapshot.error}'),
+                  //       );
+                  //     }
+                  //     return ListTile(
+                  //       title: Text('Loading...'),
+                  //       leading: CircularProgressIndicator(),
+                  //     );
+                  //   },

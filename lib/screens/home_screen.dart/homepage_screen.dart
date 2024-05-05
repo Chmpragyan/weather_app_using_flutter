@@ -58,12 +58,16 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 34, 16, 66),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+      ),
+      // backgroundColor: const Color.fromARGB(255, 34, 16, 66),
+      backgroundColor: Colors.deepPurple,
       body: Column(
         children: [
           Container(
             margin: EdgeInsets.only(
-              top: 60,
+              top: 10,
               left: 25,
               right: 25,
             ),
