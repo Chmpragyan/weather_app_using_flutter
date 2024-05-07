@@ -9,6 +9,6 @@ The project is a simple weather app that displays the weather of given places.
 - Cross platform
 
 # Screenshots
-![Screenshot (110)](https://user-images.githubusercontent.com/81068801/229262105-2c304e37-a383-4b8c-ad83-c0faafc65e53.png)
-![Screenshot (112)](https://user-images.githubusercontent.com/81068801/229262124-921e0cf0-1f92-4649-b336-2b432770cee6.png)
-![Screenshot (111)](https://user-images.githubusercontent.com/81068801/229262143-62d8962e-59b1-467a-96c6-fb1664d26889.png)
+![99264f1f-0bb7-42e1-9294-e3936ff7c8c8](https://github.com/Chmpragyan/weather_app_using_flutter/assets/81068801/b85180ab-3078-49b5-a111-b4847a3c8d55)
+
+![ss2](https://github.com/Chmpragyan/weather_app_using_flutter/assets/81068801/60c578c1-c56e-4524-8e79-f8af912e1a13)
